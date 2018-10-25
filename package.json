@@ -2,6 +2,14 @@
   "name": "@adenin/generator-cloud-connector",
   "version": "1.0.2",
   "description": "Generate boilerplate for an adenin cloud function connector",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NowAssistant/generator-cloud-connector"
+  },
+  "bugs": {
+    "url": "https://github.com/NowAssistant/generator-cloud-connector/issues"
+  },
+  "author": "olliejm",
   "files": [
     "generators"
   ],
