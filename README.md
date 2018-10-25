@@ -1,9 +1,9 @@
-# generator-adenin-cloud-connector
+# generator-cloud-connector
 > Generate a boilerplate adenin cloud function connector
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-adenin-cloud-connector using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io) and generator-cloud-connector using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
