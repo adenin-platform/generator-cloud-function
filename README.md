@@ -1,4 +1,4 @@
-# generator-adenin-cloud-connector [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# generator-adenin-cloud-connector
 > Generate a boilerplate adenin cloud function connector
 
 ## Installation
