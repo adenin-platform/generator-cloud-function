@@ -6,38 +6,38 @@ const routes = require('./index');
 const app = new Koa();
 
 app
-    .use(bodyParser())
-    .use(async (ctx, next) => {
-        try {
-            await next();
-        } catch (err) {
-            ctx.status = err.status || 500;
-            ctx.body = {
-                error: err.message
-            };
+  .use(bodyParser())
+  .use(async (ctx, next) => {
+    try {
+      await next();
+    } catch (err) {
+      ctx.status = err.status || 500;
+      ctx.body = {
+        error: err.message
+      };
 
-            ctx.app.emit('error', err, ctx);
-        }
-    })
-    .use(async ctx => {
-        const service = ctx.url.split('/')[1];
+      ctx.app.emit('error', err, ctx);
+    }
+  })
+  .use(async ctx => {
+    const service = ctx.url.split('/')[1];
 
-        if (routes[service]) {
-            await routes[service](ctx);
-        } else {
-            ctx.status = 404;
-            ctx.body = {
-                error: 'Route not found',
-                routes: Object.keys(routes)
-            };
-        }
-    })
-    .on('error', (err, ctx) => {
-        console.error({
-            error: err,
-            context: ctx
-        });
-    })
-    .listen(3000);
+    if (routes[service]) {
+      await routes[service](ctx);
+    } else {
+      ctx.status = 404;
+      ctx.body = {
+        error: 'Route not found',
+        routes: Object.keys(routes)
+      };
+    }
+  })
+  .on('error', (err, ctx) => {
+    console.error({
+      error: err,
+      context: ctx
+    });
+  })
+  .listen(3000);
 
 console.info('Server running on port 3000');
