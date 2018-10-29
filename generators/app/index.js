@@ -6,14 +6,15 @@ module.exports = class extends Generator {
     super(args, opts);
 
     this.argument('appname', {
-      type: String,
-      required: true,
-      desc: 'Connector name'
+      desc: 'Name for the connector',
+      required: false,
+      type: String
     });
 
     this.argument('services', {
-      type: Array,
-      required: false
+      desc: 'Space-separated list of services in format name:template',
+      required: false,
+      type: Array
     });
   }
 
@@ -25,13 +26,38 @@ module.exports = class extends Generator {
     }
   }
 
+  async prompting() {
+    if (!this.options.appname) {
+      this.answers = await this.prompt([
+        {
+          type: 'input',
+          name: 'appname',
+          message: 'Your connector name:',
+          default: 'myconnector'
+        },
+        {
+          type: 'confirm',
+          name: 'addservices',
+          message: 'Do you want to add a service?',
+          default: false
+        }
+      ]);
+
+      if (this.answers.addservices) {
+        this.composeWith(require.resolve('../service'));
+      }
+    }
+  }
+
   writing() {
-    this.destinationRoot(this.destinationRoot() + '/' + this.options.appname);
+    const appname = this.options.appname ? this.options.appname : this.answers.appname;
+
+    this.destinationRoot(this.destinationRoot() + '/' + appname);
 
     this.fs.copyTpl(
       this.templatePath('_package.json'),
       this.destinationPath('package.json'),
-      { appname: this.options.appname }
+      { appname: appname }
     );
 
     this.fs.copy(

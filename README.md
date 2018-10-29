@@ -21,10 +21,10 @@ This will generate a folder `my-project` in your current directory, containing t
 By default, it will contain no boilerplate for connector services. These can be specified by supplying additional arguments:
 
 ```bash
-yo @adenin/cloud-connector my-project myservice myotherservice
+yo @adenin/cloud-connector my-project myservice:sql myotherservice:empty
 ```
 
-This will generate a project containing subfolders with boilerplate for two services (functions), `myservice` and `myotherservice`.
+This will generate a project containing subfolders with boilerplate for two services (functions), `myservice` and `myotherservice`, which use SQL and empty templates respectively.
 
 From within an existing repo, you can add additional service boilerplate using the service subgenerator as follows:
 
@@ -33,8 +33,16 @@ From within an existing repo, you can add additional service boilerplate using t
 cd my-project 
 
 # generate one or more services with the given names
-yo @adenin/cloud-connector:service myfirstservice mysecondservice
+yo @adenin/cloud-connector:service myfirstservice:card mysecondservice:sql
 ```
 
 Once generated, you simply need to implement your function behaviour in `/servicename/index.js`, and the remainder of the files can be left alone.
+
+You can also run either of the commands without arguments to construct boilerplate through prompting interface:
+
+```bash
+yo @adenin/cloud-connector
+
+yo @adenin/cloud-connector:service
+```
 
