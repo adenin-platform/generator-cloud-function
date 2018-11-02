@@ -35,9 +35,7 @@
   },
   "dependencies": {
     "chalk": "^2.1.0",
-    "package-merge": "^0.1.2",
-    "yeoman-generator": "^2.0.1",
-    "yosay": "^2.0.1"
+    "yeoman-generator": "^2.0.1"
   },
   "jest": {
     "testEnvironment": "node"
@@ -62,7 +60,6 @@
       "node": true
     },
     "rules": {
-      "no-await-in-loop": 0,
       "prettier/prettier": [
         "error",
         {
