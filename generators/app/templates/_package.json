@@ -1,20 +1,19 @@
 {
-    "name": "<%= appname %>",
-    "version": "1.0.0",
-    "description": "<%= appname %> cloud connector",
-    "main": "index.js",
-    "scripts": {
-      "start": "node app.js",
-      "dev": "./node_modules/.bin/nodemon app.js"
-    },
-    "dependencies": {
-      "@adenin/cf-logger": "^1.2.2",
-      "@adenin/cf-provider": "^1.0.11",
-      "koa": "^2.5.3",
-      "koa-bodyparser": "^4.2.1"
-    },
-    "devDependencies": {
-      "nodemon": "^1.18.4"
-    }
+  "name": "<%= appname %>",
+  "version": "1.0.0",
+  "description": "<%= appname %> cloud connector",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "./node_modules/.bin/nodemon app.js"
+  },
+  "dependencies": {
+    "@adenin/cf-logger": "^1.2.5",
+    "@adenin/cf-provider": "^1.0.12",
+    "koa": "^2.5.3",
+    "koa-bodyparser": "^4.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
 }
-  
