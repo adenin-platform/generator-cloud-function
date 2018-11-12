@@ -1,6 +1,6 @@
 {
   "name": "@adenin/generator-cloud-connector",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "Generate boilerplate for an adenin cloud function connector",
   "repository": {
     "type": "git",
