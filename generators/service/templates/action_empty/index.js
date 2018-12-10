@@ -1,17 +1,26 @@
+'use strict';
+
 const logger = require('@adenin/cf-logger');
 
-module.exports = async activity => {
-  try {
-    // Empty action
-    logger.info('This is an empty service');
-  } catch (error) {
-    var m = error.message;
-    if (error.stack) m = m + ': ' + error.stack;
+module.exports = async (activity) => {
+    try {
+        // Empty action
+        const message = 'This is an empty connector';
 
-    activity.Response.ErrorCode = (error.response && error.response.statusCode) || 500;
+        logger.info(message);
+        activity.message = message;
+    } catch (error) {
+        let m = error.message;
 
-    activity.Response.Data = { ErrorText: m };
-  }
+        if (error.stack) {
+            m = m + ': ' + error.stack;
+        }
 
-  return activity;
+        activity.Response.ErrorCode =
+            (error.response && error.response.statusCode) || 500;
+
+        activity.Response.Data = {
+            ErrorText: m
+        };
+    }
 };
