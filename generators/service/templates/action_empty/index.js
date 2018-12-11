@@ -5,7 +5,7 @@ const logger = require('@adenin/cf-logger');
 module.exports = async (activity) => {
     try {
         // Empty action
-        const message = 'This is an empty connector';
+        const message = 'This is an empty function';
 
         logger.info(message);
         activity.message = message;

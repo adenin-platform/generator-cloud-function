@@ -6,13 +6,13 @@ module.exports = class extends Generator {
     super(args, opts);
 
     this.argument('appname', {
-      desc: 'Name for the connector',
+      desc: 'Name for the repo',
       required: false,
       type: String
     });
 
     this.argument('services', {
-      desc: 'Space-separated list of services in format name:template',
+      desc: 'Space-separated list of functions in format name:template',
       required: false,
       type: Array
     });
@@ -32,13 +32,13 @@ module.exports = class extends Generator {
         {
           type: 'input',
           name: 'appname',
-          message: 'Your connector name:',
-          default: 'myconnector'
+          message: 'Your repo name:',
+          default: 'myproject'
         },
         {
           type: 'confirm',
           name: 'addservices',
-          message: 'Do you want to add a service?',
+          message: 'Do you want to add a function?',
           default: false
         }
       ]);

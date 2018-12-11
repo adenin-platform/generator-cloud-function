@@ -5,7 +5,7 @@ const logger = require('@adenin/cf-logger');
 module.exports = async (activity) => {
     try {
         // Card action
-        const message = 'This is a card action connector';
+        const message = 'This is a card action function';
 
         logger.info(message);
         activity.message = message;

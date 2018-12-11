@@ -5,7 +5,7 @@ const logger = require('@adenin/cf-logger');
 module.exports = async (activity) => {
     try {
         // SQL action
-        const message = 'This is an SQL action connector';
+        const message = 'This is an SQL action function';
 
         logger.info(message);
         activity.message = message;
