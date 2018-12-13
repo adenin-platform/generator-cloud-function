@@ -6,22 +6,22 @@ module.exports = class extends Generator {
     super(args, opts);
 
     this.argument('appname', {
-      desc: 'Name for the repo',
+      desc: 'Name for the cloud function',
       required: false,
       type: String
     });
 
-    this.argument('services', {
-      desc: 'Space-separated list of functions in format name:template',
+    this.argument('activities', {
+      desc: 'Space-separated list of activities in format name:template',
       required: false,
       type: Array
     });
   }
 
   initializing() {
-    if (this.options.services) {
-      this.composeWith(require.resolve('../service'), {
-        arguments: this.options.services
+    if (this.options.activities) {
+      this.composeWith(require.resolve('../activity'), {
+        arguments: this.options.activities
       });
     }
   }
@@ -32,19 +32,19 @@ module.exports = class extends Generator {
         {
           type: 'input',
           name: 'appname',
-          message: 'Your repo name:',
-          default: 'myproject'
+          message: "Your cloud function's name:",
+          default: 'myfunction'
         },
         {
           type: 'confirm',
-          name: 'addservices',
-          message: 'Do you want to add a function?',
+          name: 'addactivities',
+          message: 'Do you want to add an activity?',
           default: false
         }
       ]);
 
-      if (this.answers.addservices) {
-        this.composeWith(require.resolve('../service'));
+      if (this.answers.addactivities) {
+        this.composeWith(require.resolve('../activity'));
       }
     }
   }

@@ -1,7 +1,7 @@
 {
   "name": "@adenin/generator-cloud-function",
   "version": "1.4.0",
-  "description": "Generate boilerplate for an adenin cloud function repo",
+  "description": "Generate an adenin cloud function repository",
   "repository": {
     "type": "git",
     "url": "https://github.com/NowAssistant/generator-cloud-function"
@@ -15,7 +15,9 @@
   ],
   "main": "generators/index.js",
   "keywords": [
-    "",
+    "adenin",
+    "cloud-function",
+    "function-as-a-service",
     "yeoman-generator"
   ],
   "devDependencies": {

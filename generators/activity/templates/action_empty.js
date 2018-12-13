@@ -4,11 +4,14 @@ const logger = require('@adenin/cf-logger');
 
 module.exports = async (activity) => {
     try {
-        // Empty action
-        const message = 'This is an empty function';
+        // Empty
+        const message = 'This is an empty activity';
 
         logger.info(message);
-        activity.message = message;
+        
+        activity.Response.Data = {
+            message: message
+        };
     } catch (error) {
         let m = error.message;
 
