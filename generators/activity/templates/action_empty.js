@@ -19,8 +19,7 @@ module.exports = async (activity) => {
             m = m + ': ' + error.stack;
         }
 
-        activity.Response.ErrorCode =
-            (error.response && error.response.statusCode) || 500;
+        activity.Response.ErrorCode = (error.response && error.response.statusCode) || 500;
 
         activity.Response.Data = {
             ErrorText: m
