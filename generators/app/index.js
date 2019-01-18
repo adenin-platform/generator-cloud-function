@@ -66,8 +66,8 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
-      this.templatePath('gitkeep'),
-      this.destinationPath('activities/.gitkeep')
+      this.templatePath('function.json'),
+      this.destinationPath('activities/function.json')
     );
 
     this.fs.copy(

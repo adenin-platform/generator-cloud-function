@@ -82,11 +82,6 @@ module.exports = class extends Generator {
       activities = this.answers.activities;
     }
 
-    this.fs.copy(
-      this.templatePath('function.json'),
-      this.destinationPath('activities/function.json')
-    );
-
     for (let i = 0; i < activities.length; i++) {
       const name = activities[i].name;
       const type = activities[i].template;
