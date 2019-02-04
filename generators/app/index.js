@@ -75,6 +75,11 @@ module.exports = class extends Generator {
       this.destinationPath('activities/common/.gitkeep')
     );
 
+    this.fs.copy(
+      this.templatePath('launch.json'),
+      this.destinationPath('.vscode/launch.json')
+    );
+
     this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
     this.fs.copy(this.templatePath('index.js'), this.destinationPath('index.js'));
     this.fs.copy(this.templatePath('app.js'), this.destinationPath('app.js'));
