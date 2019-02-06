@@ -60,6 +60,12 @@ module.exports = class extends Generator {
       { appname: appname }
     );
 
+    this.fs.copyTpl(
+      this.templatePath('__definition.yaml'),
+      this.destinationPath('_definition.yaml'),
+      { appname: appname }
+    );
+
     this.fs.copy(
       this.templatePath('gcloudignore'),
       this.destinationPath('.gcloudignore')
@@ -71,8 +77,13 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
-      this.templatePath('gitkeep'),
-      this.destinationPath('activities/common/.gitkeep')
+      this.templatePath('api.js'),
+      this.destinationPath('activities/common/api.js')
+    );
+
+    this.fs.copy(
+      this.templatePath('utils.js'),
+      this.destinationPath('activities/common/utils.js')
     );
 
     this.fs.copy(

@@ -86,6 +86,12 @@ module.exports = class extends Generator {
       const name = activities[i].name;
       const type = activities[i].template;
 
+      this.fs.copyTpl(
+        this.templatePath('__service.yaml'),
+        this.destinationPath('_service.' + name + '.yaml'),
+        { name: name }
+      );
+
       this.fs.copy(
         this.templatePath('action_' + type + '.js'),
         this.destinationPath('activities/' + name + '.js')
