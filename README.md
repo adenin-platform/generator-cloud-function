@@ -46,3 +46,13 @@ yo @adenin/cloud-function
 yo @adenin/cloud-function:activity
 ```
 
+Generation will also create `.yaml` configuration files which affect behaviour in v1 only.
+
+To update the infrastructure of a cloud function repo to a new version, use the update subgenerator:
+
+```bash
+cd my-cloud-function
+
+yo @adenin/cloud-function:update
+```
+Check any override warnings to ensure that none of your own code is going to be overwritten.
