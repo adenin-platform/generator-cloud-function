@@ -101,4 +101,6 @@ cd my-hybrid-connector
 yo @adenin/cloud-function:activity another:empty
 ```
 
-Which again would add `another.js` and `_service.another.js`.
+Which again would add `another.js` and `_service.another.yaml`.
+
+The generator will automatically run `npm install` upon completion.
