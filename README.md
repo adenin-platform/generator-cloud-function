@@ -10,7 +10,9 @@ npm install -g yo
 npm install -g @adenin/generator-cloud-function
 ```
 
-Then generate your new project:
+## Usage
+
+Generate your new project:
 
 ```bash
 yo @adenin/cloud-function my-project
@@ -24,7 +26,9 @@ By default, it will contain no boilerplate for individual activities. These can 
 yo @adenin/cloud-function my-project myactivity:sql myotheractivity:empty
 ```
 
-This will generate a project containing an _activities_ subfolder with boilerplate for two activities, `myactivity` and `myotheractivity`, which use SQL and empty templates respectively. It will also generate the `function.json` necessary to use Azure functions deployment.
+After generation in this case, the _activities_ subfolder will be populated with boilerplate for two activities, `myactivity` and `myotheractivity`, which use SQL and empty templates respectively. It will also generate the `function.json` necessary to use Azure functions deployment.
+
+## Adding to an existing project
 
 From within an existing repo, you can add a new activity boilerplate using the activity subgenerator as follows:
 
@@ -46,13 +50,55 @@ yo @adenin/cloud-function
 yo @adenin/cloud-function:activity
 ```
 
-Generation will also create `.yaml` configuration files which affect behaviour in v1 only.
-
-To update the infrastructure of a cloud function repo to a new version, use the update subgenerator:
+To update the infrastructure of a cloud function repo to a newer version, use the update subgenerator:
 
 ```bash
+npm update -g @adenin/generator-cloud-function
+
 cd my-cloud-function
 
 yo @adenin/cloud-function:update
 ```
 Check any override warnings to ensure that none of your own code is going to be overwritten.
+
+## Using the repo as a hybrid v1 connector
+
+Generation will also create `.yaml` configuration files which affect behaviour in v1 only.
+
+The process of creating a hybrid connector within v1 is much the same as above, and from start to end, might look like:
+
+```bash
+npm install -g @adenin/generator-cloud-function
+
+cd SpacesLocal\\Global\\Connectors
+
+yo @adenin/cloud-function my-hybrid-connector ping:empty
+```
+
+You'd then end up with a repo as follows:
+
+```
+./my-hybrid-connector
+├── .vscode
+|   └── launch.json
+├── activities
+|   ├── common
+|   |    ├── api.js
+|   |    └── utils.js
+|   ├── ping.js
+|   └── function.json
+├── _definition.yaml
+├── _service.ping.yaml
+├── app.js
+└── index.js
+```
+
+The connector would be exposed to v1 with name _my-hybrid-connector_ by default, with service _ping_ available, where `ping.js` would only contain empty boilerplate. The YAML configurations could then be altered as normal to adjust the functionality of the connector and service, and another service boilerplate could be added with:
+
+```bash
+cd my-hybrid-connector
+
+yo @adenin/cloud-function:activity another:empty
+```
+
+Which again would add `another.js` and `_service.another.js`.
