@@ -1,7 +1,7 @@
 'use strict';
 
 const logger = require('@adenin/cf-logger');
-const utils = require('./common/utils');
+const handleError = require('@adenin/cf-activity').handleError;
 
 module.exports = async (activity) => {
     try {
@@ -13,6 +13,6 @@ module.exports = async (activity) => {
             message: message
         };
     } catch (error) {
-        utils.handleError(error, activity);
+        handleError(error, activity);
     }
 };
