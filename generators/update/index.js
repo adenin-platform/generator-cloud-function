@@ -22,6 +22,11 @@ module.exports = class extends Generator {
       this.templatePath('../../app/templates/launch.json'),
       this.destinationPath('.vscode/launch.json')
     );
+
+    this.fs.copy(
+      this.templatePath('../../app/templates/host.json'),
+      this.destinationPath('host.json')
+    );
   }
 
   install() {
