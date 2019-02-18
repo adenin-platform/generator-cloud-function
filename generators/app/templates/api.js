@@ -14,7 +14,7 @@ function api(path, opts) {
     opts = Object.assign({
         json: true,
         token: _activity.Context.connector.token,
-        endpoint: _activity.Context.connector.endpoint,
+        endpoint: 'http://httpbin.org', // *todo* provide API base url
         agent: {
             http: new HttpAgent(),
             https: new HttpsAgent()
@@ -61,8 +61,14 @@ api.initialize = function (activity) {
 
 for (const x of helpers) {
     const method = x.toUpperCase();
-    api[x] = (url, opts) => api(url, Object.assign({}, opts, {method}));
-    api.stream[x] = (url, opts) => api.stream(url, Object.assign({}, opts, {method}));
+  
+    api[x] = (url, opts) => api(url, Object.assign({}, opts, {
+        method
+    }));
+  
+    api.stream[x] = (url, opts) => api.stream(url, Object.assign({}, opts, {
+        method
+    }));
 }
 
 module.exports = api;
