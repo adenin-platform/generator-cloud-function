@@ -90,6 +90,11 @@ module.exports = class extends Generator {
       this.destinationPath('.vscode/launch.json')
     );
 
+    this.fs.copy(
+      this.templatePath('settings.json'),
+      this.destinationPath('.vscode/settings.json')
+    );
+
     this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
     this.fs.copy(this.templatePath('host.json'), this.destinationPath('host.json'));
     this.fs.copy(this.templatePath('index.js'), this.destinationPath('index.js'));
