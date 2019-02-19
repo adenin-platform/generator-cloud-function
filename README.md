@@ -104,3 +104,39 @@ yo @adenin/cloud-function:activity another:empty
 Which again would add `another.js` and `_service.another.yaml`.
 
 The generator will automatically run `npm install` upon completion.
+
+## Updating one of the dependencies (cf-provider, cf-activity, cf-logger)
+
+For the generator to reflect any changes made to one of the three common dependencies, any changes must be published to npm.
+
+The process is as follows (using cf-activity as an example, but same for all repos):
+
+```bash
+cd cf-activity
+
+# ...make your changes to the dependency...
+
+# commit them
+git add .
+git commit -m "my changes"
+
+# increment npm version and publish
+npm version patch # or 'minor' for new features, 'major' for breaking API changes (see below)
+npm publish
+
+# push to git to reflect changes + new version number
+git push origin master
+
+# go into the function repo and fetch the new changes
+cd my-cloud-function
+
+npm update
+# OR
+yo @adenin/cloud-function:update # (also apply any changes to generator)
+```
+
+### Major npm versions
+
+If the changes break the API of the module, npm version should be incremented by 'major' number. To avoid accidentally breaking existing function repos, neither `npm update`, nor the update subgenerator, will fetch new major versions. 
+
+The major version number will have to be explicitly specified to the npm update command to override this, or the generator will need to be changed to ensure the API changes are addressed, then have it's `package.json` template, and update subgenerator npm commands, updated to allow the new major version.

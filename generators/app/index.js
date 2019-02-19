@@ -66,6 +66,10 @@ module.exports = class extends Generator {
       { appname: appname }
     );
 
+    this.fs.copyTpl(this.templatePath('_README.md'), this.destinationPath('README.md'), {
+      appname: appname
+    });
+
     this.fs.copy(
       this.templatePath('gcloudignore'),
       this.destinationPath('.gcloudignore')
