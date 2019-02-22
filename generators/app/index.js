@@ -1,4 +1,6 @@
 'use strict';
+
+const fs = require('fs');
 const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
@@ -19,6 +21,14 @@ module.exports = class extends Generator {
   }
 
   initializing() {
+    const files = fs.readdirSync(this.destinationPath());
+
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].indexOf('_definition.yaml') !== -1) {
+        this.options.isInitialised = true;
+      }
+    }
+
     if (this.options.activities) {
       this.composeWith(require.resolve('../activity'), {
         arguments: this.options.activities
@@ -27,7 +37,7 @@ module.exports = class extends Generator {
   }
 
   async prompting() {
-    if (!this.options.appname) {
+    if (!this.options.appname && !this.options.isInitialised) {
       this.answers = await this.prompt([
         {
           type: 'input',
@@ -42,14 +52,31 @@ module.exports = class extends Generator {
           default: false
         }
       ]);
+    }
 
-      if (this.answers.addactivities) {
-        this.composeWith(require.resolve('../activity'));
-      }
+    if (this.options.isInitialised) {
+      this.answers = await this.prompt([
+        {
+          type: 'confirm',
+          name: 'addactivities',
+          message: 'Do you want to add an activity?',
+          default: false
+        }
+      ]);
+    }
+
+    console.log(this.answers.addactivites);
+
+    if (this.answers.addactivities) {
+      this.composeWith(require.resolve('../activity'));
     }
   }
 
   writing() {
+    if (this.options.isInitialised) {
+      return;
+    }
+
     const appname = this.options.appname ? this.options.appname : this.answers.appname;
 
     this.destinationRoot(this.destinationRoot() + '/' + appname);
@@ -102,6 +129,8 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.npmInstall();
+    if (!this.options.isInitialised) {
+      this.npmInstall();
+    }
   }
 };
