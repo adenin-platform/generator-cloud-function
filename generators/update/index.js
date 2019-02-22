@@ -35,7 +35,10 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.spawnCommand('npm', ['install', '@adenin/cf-activity']);
-    this.spawnCommand('npm update');
+    this.spawnCommand(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', [
+      'install',
+      '@adenin/cf-activity'
+    ]);
+    this.spawnCommand(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['update']);
   }
 };
