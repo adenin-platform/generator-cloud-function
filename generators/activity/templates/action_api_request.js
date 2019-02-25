@@ -2,7 +2,7 @@
 
 const api = require('./common/api');
 const logger = require('@adenin/cf-logger');
-const {isResponseOk, handleError} = require('@adenin/cf-activity');
+const cfActivity = require('@adenin/cf-activity');
 
 module.exports = async (activity) => {
   try {
@@ -10,7 +10,7 @@ module.exports = async (activity) => {
 
     const response = await api('/ip'); // *todo* provide endpoint
 
-    if (!isResponseOk(activity, response)) {
+    if (!cfActivity.isResponseOk(activity, response)) {
       return;
     }
 
@@ -19,6 +19,6 @@ module.exports = async (activity) => {
     activity.Response.Data = response.body;
   } catch (error) {
     // handle generic exception
-    handleError(activity, error);
+    cfActivity.handleError(activity, error);
   }
 };

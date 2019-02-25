@@ -105,16 +105,59 @@ Which again would add `another.js` and `_service.another.yaml`.
 
 The generator will automatically run `npm install` upon completion.
 
-## Updating one of the dependencies (cf-provider, cf-activity, cf-logger)
+## Developing with the cf dependencies locally (cf-provider, cf-activity, cf-logger)
 
-For the generator to reflect any changes made to one of the three common dependencies, any changes must be published to npm.
+For the generator to reflect any changes made to one of the three common dependencies, any changes must be published to npm. You will therefore also need to develop and test locally with the repos beforehand.
+
+### Link your function repo to the development dependency clone
+
+When developing with the dependencies, you probably want your function repo to reflect the changes you are making without having to manually edit require statements, copy and paste changes, or publish unstable versions to npm itself. This can be achieved by using the `npm link` functionality as follows:
+
+```bash
+# clone the dependency you want to update, e.g. cf-activity
+git clone https://github.com/adenin-platform/cf-activity
+
+cd cf-activity
+
+# link the clone to a global node_modules installation
+npm link
+```
+
+You will now have a global installation of the module which actually references the development folder, and any changes to the code will be immediately reflected. Next is to tell your function repo to now refer to this local installation:
+
+```bash
+# cd into your function repo
+cd my-function
+
+# tell the repo to reference the previously created link (cf-activity in this example)
+npm link @adenin/cf-activity
+```
+
+Your function repo will now be calling the scripts in your local development clone of the dependency, and during debugging in VS code, breakpoints within your dependency clone should also be hit. Once you have finished testing your changes and want to reset your function repo to refer the the published npm package again, do the following:
+
+```bash
+# enter your function repo
+cd my-function
+
+# reinstall the dependency from npm
+npm uninstall --no-save @adenin/cf-activity && npm install 
+```
+
+The `npm unlink` command is only an alias for `npm uninstall` and so running it will not simply undo the linking process, but uninstall the dependency completely. So instead use the above process to reinstall from npm without affecting your `package.json`.
+
+> If the module you are linking depends on another local module that you want to develop and debug simultaneously - e.g. _cf-logger_ could be such a case - you need to work through the steps in this section once for each level of project nesting.
+>
+>For example with _cf-logger_, first linking it to a global reference, then linking your copy of _cf-activity_ and/or _cf-provider_ to that reference, then linking those to a global reference, before finally linking your function repo to those references.
+
+### Updating one of the dependencies
+
+For the updates to the dependencies to be installable by other users, and for the generator to install them upon next use, they must be re-published to npm.
 
 The process is as follows (using cf-activity as an example, but same for all repos):
 
 ```bash
+# go into the local repo clone where you have been making changes
 cd cf-activity
-
-# ...make your changes to the dependency...
 
 # commit them
 git add .
@@ -135,7 +178,7 @@ npm update
 yo @adenin/cloud-function:update # (also apply any changes to generator)
 ```
 
-### Major npm versions
+#### Major npm versions
 
 If the changes break the API of the module, npm version should be incremented by 'major' number. To avoid accidentally breaking existing function repos, neither `npm update`, nor the update subgenerator, will fetch new major versions. 
 
