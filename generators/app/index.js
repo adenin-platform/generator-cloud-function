@@ -65,7 +65,7 @@ module.exports = class extends Generator {
       ]);
     }
 
-    if (this.answers.addactivities) {
+    if (this.answers && this.answers.addactivities) {
       this.composeWith(require.resolve('../activity'));
     }
   }
