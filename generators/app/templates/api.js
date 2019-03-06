@@ -69,14 +69,14 @@ for (const x of helpers) {
 
 api.handleError = function (activity, error, authRequiresStatusCodes) {
   return cfActivity.handleError(activity, error, authRequiresStatusCodes);
-}
+};
 
 api.isResponseOk = function (activity, response, succssStatusCodes) {
   return cfActivity.isResponseOk(activity, response, succssStatusCodes);
-}
+};
 
 api.dateRange = function (activity, defaultRange) {
   return cfActivity.dateRange(activity, defaultRange);
-}
+};
 
 module.exports = api;
