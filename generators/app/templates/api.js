@@ -4,6 +4,8 @@ const got = require('got');
 const HttpAgent = require('agentkeepalive');
 const HttpsAgent = HttpAgent.HttpsAgent;
 
+const cfActivity = require('@adenin/cf-activity');
+
 let _activity = null;
 
 function api(path, opts) {
@@ -63,6 +65,18 @@ for (const x of helpers) {
   const method = x.toUpperCase();
   api[x] = (url, opts) => api(url, Object.assign({}, opts, {method}));
   api.stream[x] = (url, opts) => api.stream(url, Object.assign({}, opts, {method}));
+}
+
+api.handleError = function (activity, error, authRequiresStatusCodes) {
+  return cfActivity.handleError(activity, error, authRequiresStatusCodes);
+}
+
+api.isResponseOk = function (activity, response, succssStatusCodes) {
+  return cfActivity.isResponseOk(activity, response, succssStatusCodes);
+}
+
+api.dateRange = function (activity, defaultRange) {
+  return cfActivity.dateRange(activity, defaultRange);
 }
 
 module.exports = api;

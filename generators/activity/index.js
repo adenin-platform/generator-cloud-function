@@ -20,13 +20,15 @@ module.exports = class extends Generator {
         .readdirSync(this.sourceRoot())
         .filter(file => file.indexOf('action') !== -1)
         .map(file => {
-          const type = file.substring(file.indexOf('_') + 1, file.lastIndexOf('.'));
+          const type = file.substring(file.indexOf('_') + 1, file.length);
 
           return {
             name: file
-              .replace('.js', '')
-              .replace('_', ' ')
-              .replace('action ' + type, type + ' action'),
+              .replace(/_/g, ' ')
+              .replace(
+                'action ' + type.replace(/_/g, ' '),
+                type.replace(/_/g, ' ') + ' action'
+              ),
             value: type
           };
         });
@@ -87,13 +89,13 @@ module.exports = class extends Generator {
       const type = activities[i].template;
 
       this.fs.copyTpl(
-        this.templatePath('__service.yaml'),
+        this.templatePath('action_' + type + '/__service.' + type + '.yaml'),
         this.destinationPath('_service.' + name + '.yaml'),
         { name: name }
       );
 
       this.fs.copy(
-        this.templatePath('action_' + type + '.js'),
+        this.templatePath('action_' + type + '/' + type + '.js'),
         this.destinationPath('activities/' + name + '.js')
       );
     }

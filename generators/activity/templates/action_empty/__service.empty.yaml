@@ -1,0 +1,3 @@
+ServiceName: '<%= name %>'
+InterfaceName: 'items'
+Description: '<%= name %>'

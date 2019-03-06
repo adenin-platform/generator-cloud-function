@@ -1,8 +1,7 @@
 'use strict';
 
-const api = require('./common/api');
 const logger = require('@adenin/cf-logger');
-const cfActivity = require('@adenin/cf-activity');
+const api = require('./common/api');
 
 module.exports = async (activity) => {
   try {
@@ -10,7 +9,7 @@ module.exports = async (activity) => {
 
     const response = await api('/ip'); // *todo* provide endpoint
 
-    if (!cfActivity.isResponseOk(activity, response)) {
+    if (!api.isResponseOk(activity, response)) {
       return;
     }
 
@@ -19,6 +18,6 @@ module.exports = async (activity) => {
     activity.Response.Data = response.body;
   } catch (error) {
     // handle generic exception
-    cfActivity.handleError(activity, error);
+    api.handleError(activity, error);
   }
 };
