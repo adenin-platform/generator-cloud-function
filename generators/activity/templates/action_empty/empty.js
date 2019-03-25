@@ -1,6 +1,5 @@
 'use strict';
 
-const logger = require('@adenin/cf-logger');
 const api = require('./common/api');
 
 module.exports = async (activity) => {
@@ -9,10 +8,10 @@ module.exports = async (activity) => {
 
     logger.info(message);
 
-    activity.Response.Data = {
+    Activity.Response.Data = {
       message: message
     };
   } catch (error) {
-    api.handleError(activity, error);
+    api.handleError(error);
   }
 };
