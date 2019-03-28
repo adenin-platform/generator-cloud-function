@@ -62,9 +62,7 @@ module.exports = class extends Generator {
 
       this.answers.activities.push(activity);
 
-      if (activity.another) {
-        await this.addActivity();
-      }
+      if (activity.another) await this.addActivity();
     }
   }
 

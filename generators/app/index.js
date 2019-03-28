@@ -24,9 +24,7 @@ module.exports = class extends Generator {
     const files = fs.readdirSync(this.destinationPath());
 
     for (let i = 0; i < files.length; i++) {
-      if (files[i].indexOf('_definition.yaml') !== -1) {
-        this.options.isInitialised = true;
-      }
+      if (files[i].indexOf('_definition.yaml') !== -1) this.options.isInitialised = true;
     }
 
     if (this.options.activities) {
@@ -78,14 +76,14 @@ module.exports = class extends Generator {
     this.destinationRoot(this.destinationRoot() + '/' + appname);
 
     this.fs.copyTpl(
-      this.templatePath('_package.json'),
-      this.destinationPath('package.json'),
+      this.templatePath('__definition.yaml'),
+      this.destinationPath('_definition.yaml'),
       { appname: appname }
     );
 
     this.fs.copyTpl(
-      this.templatePath('__definition.yaml'),
-      this.destinationPath('_definition.yaml'),
+      this.templatePath('_package.json'),
+      this.destinationPath('package.json'),
       { appname: appname }
     );
 
@@ -94,8 +92,15 @@ module.exports = class extends Generator {
     });
 
     this.fs.copy(
-      this.templatePath('gcloudignore'),
-      this.destinationPath('.gcloudignore')
+      this.templatePath('api.js'),
+      this.destinationPath('activities/common/api.js')
+    );
+
+    this.fs.copy(this.templatePath('app.js'), this.destinationPath('app.js'));
+
+    this.fs.copy(
+      this.templatePath('azure-pipelines.yml'),
+      this.destinationPath('azure-pipelines.yml')
     );
 
     this.fs.copy(
@@ -104,9 +109,13 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
-      this.templatePath('api.js'),
-      this.destinationPath('activities/common/api.js')
+      this.templatePath('gcloudignore'),
+      this.destinationPath('.gcloudignore')
     );
+
+    this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
+    this.fs.copy(this.templatePath('host.json'), this.destinationPath('host.json'));
+    this.fs.copy(this.templatePath('index.js'), this.destinationPath('index.js'));
 
     this.fs.copy(
       this.templatePath('launch.json'),
@@ -117,16 +126,6 @@ module.exports = class extends Generator {
       this.templatePath('settings.json'),
       this.destinationPath('.vscode/settings.json')
     );
-
-    this.fs.copy(
-      this.templatePath('azure-pipelines.yml'),
-      this.destinationPath('azure-pipelines.yml')
-    );
-
-    this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
-    this.fs.copy(this.templatePath('host.json'), this.destinationPath('host.json'));
-    this.fs.copy(this.templatePath('index.js'), this.destinationPath('index.js'));
-    this.fs.copy(this.templatePath('app.js'), this.destinationPath('app.js'));
   }
 
   install() {

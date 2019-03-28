@@ -4,18 +4,28 @@ const Generator = require('yeoman-generator');
 module.exports = class extends Generator {
   writing() {
     this.fs.copy(
-      this.templatePath('../../app/templates/index.js'),
-      this.destinationPath('index.js')
-    );
-
-    this.fs.copy(
       this.templatePath('../../app/templates/app.js'),
       this.destinationPath('app.js')
     );
 
     this.fs.copy(
+      this.templatePath('../../app/templates/azure-pipelines.yml'),
+      this.destinationPath('azure-pipelines.yml')
+    );
+
+    this.fs.copy(
       this.templatePath('../../app/templates/function.json'),
       this.destinationPath('activities/function.json')
+    );
+
+    this.fs.copy(
+      this.templatePath('../../app/templates/host.json'),
+      this.destinationPath('host.json')
+    );
+
+    this.fs.copy(
+      this.templatePath('../../app/templates/index.js'),
+      this.destinationPath('index.js')
     );
 
     this.fs.copy(
@@ -26,16 +36,6 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('../../app/templates/settings.json'),
       this.destinationPath('.vscode/settings.json')
-    );
-
-    this.fs.copy(
-      this.templatePath('../../app/templates/azure-pipelines.yml'),
-      this.destinationPath('azure-pipelines.yml')
-    );
-
-    this.fs.copy(
-      this.templatePath('../../app/templates/host.json'),
-      this.destinationPath('host.json')
     );
   }
 
