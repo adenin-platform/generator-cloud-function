@@ -71,9 +71,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    if (this.options.isInitialised) {
-      return;
-    }
+    if (this.options.isInitialised) return;
 
     const appname = this.options.appname ? this.options.appname : this.answers.appname;
 
@@ -120,6 +118,11 @@ module.exports = class extends Generator {
       this.destinationPath('.vscode/settings.json')
     );
 
+    this.fs.copy(
+      this.templatePath('azure-pipelines.yml'),
+      this.destinationPath('azure-pipelines.yml')
+    );
+
     this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
     this.fs.copy(this.templatePath('host.json'), this.destinationPath('host.json'));
     this.fs.copy(this.templatePath('index.js'), this.destinationPath('index.js'));
@@ -127,8 +130,6 @@ module.exports = class extends Generator {
   }
 
   install() {
-    if (!this.options.isInitialised) {
-      this.npmInstall();
-    }
+    if (!this.options.isInitialised) this.npmInstall();
   }
 };

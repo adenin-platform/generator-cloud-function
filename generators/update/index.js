@@ -29,6 +29,11 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
+      this.templatePath('../../app/templates/azure-pipelines.yml'),
+      this.destinationPath('azure-pipelines.yml')
+    );
+
+    this.fs.copy(
       this.templatePath('../../app/templates/host.json'),
       this.destinationPath('host.json')
     );
