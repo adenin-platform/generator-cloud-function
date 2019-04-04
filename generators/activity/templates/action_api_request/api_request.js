@@ -13,6 +13,6 @@ module.exports = async () => {
     Activity.Response.Data = response.body;
   } catch (error) {
     // handle generic exception
-    api.handleError(error);
+    Activity.handleError(error);
   }
 };

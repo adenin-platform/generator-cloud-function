@@ -12,6 +12,6 @@ module.exports = async () => {
       message: message
     };
   } catch (error) {
-    api.handleError(error);
+    Activity.handleError(error);
   }
 };
