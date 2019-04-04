@@ -6,7 +6,7 @@ module.exports = async () => {
   try {
     const response = await api('/ip'); // *todo* provide endpoint
 
-    if (api.isErrorResponse(response)) return;
+    if (Activity.isErrorResponse(response)) return;
 
     logger.info('received', response.body);
 
