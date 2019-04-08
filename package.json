@@ -1,6 +1,6 @@
 {
   "name": "@adenin/generator-cloud-function",
-  "version": "2.7.5",
+  "version": "2.7.6",
   "description": "Generate an adenin cloud function repository",
   "repository": {
     "type": "git",
