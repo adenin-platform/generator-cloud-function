@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@adenin/cf-provider": "^2.5.1",
-    "agentkeepalive": "^4.0.0",
+    "agentkeepalive": "^4.0.2",
     "got": "^9.6.0"
   },
   "devDependencies": {
