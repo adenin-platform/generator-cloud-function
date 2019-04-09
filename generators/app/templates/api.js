@@ -5,7 +5,9 @@ const HttpAgent = require('agentkeepalive');
 const HttpsAgent = HttpAgent.HttpsAgent;
 
 function api(path, opts) {
-  if (typeof path !== 'string') return Promise.reject(new TypeError(`Expected \`path\` to be a string, got ${typeof path}`));
+  if (typeof path !== 'string') {
+    return Promise.reject(new TypeError(`Expected \`path\` to be a string, got ${typeof path}`));
+  }
 
   opts = Object.assign({
     json: true,
