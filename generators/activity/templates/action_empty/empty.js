@@ -1,15 +1,15 @@
 'use strict';
 
-module.exports = async () => {
+module.exports = async (activity) => {
   try {
     const message = 'This is an empty activity';
 
     logger.info(message);
 
-    Activity.Response.Data = {
+    activity.Response.Data = {
       message: message
     };
   } catch (error) {
-    Activity.handleError(error);
+    $.handleError(activity, error);
   }
 };

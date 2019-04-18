@@ -13,11 +13,18 @@
   "files": [
     "generators"
   ],
-  "main": "generators/index.js",
+  "main": "generators/app/index.js",
   "keywords": [
     "adenin",
-    "cloud-function",
+    "cloud",
+    "function",
     "function-as-a-service",
+    "faas",
+    "azure",
+    "aws",
+    "lambda",
+    "gcp",
+    "compute",
     "yeoman-generator"
   ],
   "devDependencies": {
@@ -26,7 +33,6 @@
     "eslint-config-xo": "^0.24.2",
     "eslint-plugin-prettier": "^2.6.0",
     "husky": "^0.14.3",
-    "jest": "^23.5.0",
     "lint-staged": "^7.2.2",
     "prettier": "^1.16.4",
     "yeoman-assert": "^3.1.0",
@@ -36,11 +42,9 @@
     "npm": ">= 4.0.0"
   },
   "dependencies": {
+    "acorn": "^6.1.1",
     "chalk": "^2.4.2",
     "yeoman-generator": "^2.0.1"
-  },
-  "jest": {
-    "testEnvironment": "node"
   },
   "lint-staged": {
     "*.js": [
@@ -58,7 +62,6 @@
       "prettier"
     ],
     "env": {
-      "jest": true,
       "node": true
     },
     "rules": {
@@ -76,7 +79,6 @@
   },
   "scripts": {
     "pretest": "eslint .",
-    "precommit": "lint-staged",
-    "test": "jest"
+    "precommit": "lint-staged"
   }
 }

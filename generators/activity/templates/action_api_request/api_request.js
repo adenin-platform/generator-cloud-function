@@ -2,17 +2,19 @@
 
 const api = require('./common/api');
 
-module.exports = async () => {
+module.exports = async (activity) => {
   try {
+    api.initialize(activity);
+
     const response = await api('/ip'); // *todo* provide endpoint
 
-    if (Activity.isErrorResponse(response)) return;
+    if ($.isErrorResponse(activity, response)) return;
 
     logger.info('received', response.body);
 
-    Activity.Response.Data = response.body;
+    activity.Response.Data = response.body;
   } catch (error) {
     // handle generic exception
-    Activity.handleError(error);
+    $.handleError(activity, error);
   }
 };
