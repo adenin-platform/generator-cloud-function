@@ -15,7 +15,7 @@ function api(path, opts) {
     json: true,
     token: _activity.Context.connector.token,
     endpoint: _activity.Context.connector.endpoint,
-    agent: {
+    agent: _activity.Context.ProxyServer.agent ? _activity.Context.ProxyServer.agent : {
       http: new HttpAgent(),
       https: new HttpsAgent()
     }

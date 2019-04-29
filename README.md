@@ -1,4 +1,5 @@
 # generator-cloud-function
+
 > Generate a boilerplate adenin cloud function repo
 
 ## Installation
@@ -34,7 +35,7 @@ From within an existing repo, you can add a new activity boilerplate using the a
 
 ```bash
 # make sure you're in your project folder
-cd my-project 
+cd my-project
 
 # generate one or more services with the given names
 yo @adenin/cloud-function:activity myfirstactivity:card mysecondactivity:sql
@@ -59,6 +60,7 @@ cd my-cloud-function
 
 yo @adenin/cloud-function:update
 ```
+
 Check any override warnings to ensure that none of your own code is going to be overwritten.
 
 ## Using the repo as a hybrid v1 connector
@@ -77,7 +79,7 @@ yo @adenin/cloud-function my-hybrid-connector ping:empty
 
 You'd then end up with a repo as follows:
 
-```
+```txt
 ./my-hybrid-connector
 ├── .vscode
 |   └── launch.json
@@ -140,7 +142,7 @@ Your function repo will now be calling the scripts in your local development clo
 cd my-function
 
 # reinstall the dependency from npm
-npm uninstall --no-save @adenin/cf-activity && npm install 
+npm uninstall --no-save @adenin/cf-activity && npm install
 ```
 
 The `npm unlink` command is only an alias for `npm uninstall` and so running it will not simply undo the linking process, but uninstall the dependency completely. So instead use the above process to reinstall from npm without affecting your `package.json`.
@@ -180,6 +182,6 @@ yo @adenin/cloud-function:update # (also apply any changes to generator)
 
 #### Major npm versions
 
-If the changes break the API of the module, npm version should be incremented by 'major' number. To avoid accidentally breaking existing function repos, neither `npm update`, nor the update subgenerator, will fetch new major versions. 
+If the changes break the API of the module, npm version should be incremented by 'major' number. To avoid accidentally breaking existing function repos, neither `npm update`, nor the update subgenerator, will fetch new major versions.
 
 The major version number will have to be explicitly specified to the npm update command to override this, or the generator will need to be changed to ensure the API changes are addressed, then have it's `package.json` template, and update subgenerator npm commands, updated to allow the new major version.
