@@ -92,6 +92,11 @@ module.exports = class extends Generator {
     });
 
     this.fs.copy(
+      this.templatePath('_service.ping.yaml'),
+      this.destinationPath('_service.ping.yaml')
+    );
+
+    this.fs.copy(
       this.templatePath('api.js'),
       this.destinationPath('activities/common/api.js')
     );
@@ -120,6 +125,11 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('launch.json'),
       this.destinationPath('.vscode/launch.json')
+    );
+
+    this.fs.copy(
+      this.templatePath('ping.js'),
+      this.destinationPath('activities/ping.js')
     );
 
     this.fs.copy(

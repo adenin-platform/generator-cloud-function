@@ -1,1 +1,1 @@
-# <%= appname %>-cloud-function
+# <%= appname %>
