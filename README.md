@@ -16,40 +16,26 @@ npm install -g @adenin/generator-cloud-function
 Generate your new project:
 
 ```bash
-yo @adenin/cloud-function my-project
+yo @adenin/cloud-function
 ```
 
-This will generate a folder `my-project` in your current directory, containing the boilerplate.
-
-By default, it will contain no boilerplate for individual activities. These can be specified by supplying additional arguments:
-
-```bash
-yo @adenin/cloud-function my-project myactivity:sql myotheractivity:empty
-```
-
-After generation in this case, the _activities_ subfolder will be populated with boilerplate for two activities, `myactivity` and `myotheractivity`, which use SQL and empty templates respectively. It will also generate the `function.json` necessary to use Azure functions deployment.
+You will then be guided through the creation process with terminal prompts, asking you enter a server name and create any desired activity templates.
 
 ## Adding to an existing project
 
-From within an existing repo, you can add a new activity boilerplate using the activity subgenerator as follows:
+From within an existing repo, you can add a new activity boilerplate by just calling the generator while your terminal is inside the existing function folder.
 
 ```bash
 # make sure you're in your project folder
 cd my-project
 
 # generate one or more services with the given names
-yo @adenin/cloud-function:activity myfirstactivity:card mysecondactivity:sql
+yo @adenin/cloud-function
 ```
 
-Once generated, you simply need to implement your function behaviour in `./activities/{functionName}.js`, and the remainder of the files can be left alone.
+Once generated, you simply need to implement your function behaviour in `./activities/{activityName}.js`, and the remainder of the files can be left alone.
 
 You can also run either of the commands without arguments to construct boilerplate through prompting interface:
-
-```bash
-yo @adenin/cloud-function
-
-yo @adenin/cloud-function:activity
-```
 
 To update the infrastructure of a cloud function repo to a newer version, use the update subgenerator:
 
@@ -74,25 +60,31 @@ npm install -g @adenin/generator-cloud-function
 
 cd SpacesLocal\\Global\\Connectors
 
-yo @adenin/cloud-function my-hybrid-connector ping:empty
+yo @adenin/cloud-function
+# ... follow the on screen creation prompts
 ```
 
-You'd then end up with a repo as follows:
+You'd then end up with a repo similar to this:
 
 ```txt
 ./my-hybrid-connector
 ├── .vscode
-|   └── launch.json
+|   ├── launch.json
+|   └── settings.json
 ├── activities
 |   ├── common
-|   |    ├── api.js
-|   |    └── utils.js
+|   |    └── api.js
 |   ├── ping.js
 |   └── function.json
 ├── _definition.yaml
 ├── _service.ping.yaml
+├── .gcloudignore
+├── .gitignore
 ├── app.js
-└── index.js
+├── azure-pipelines.yml
+├── host.json
+├── index.js
+└── README.md
 ```
 
 The connector would be exposed to v1 with name _my-hybrid-connector_ by default, with service _ping_ available, where `ping.js` would only contain empty boilerplate. The YAML configurations could then be altered as normal to adjust the functionality of the connector and service, and another service boilerplate could be added with:
@@ -100,10 +92,10 @@ The connector would be exposed to v1 with name _my-hybrid-connector_ by default,
 ```bash
 cd my-hybrid-connector
 
-yo @adenin/cloud-function:activity another:empty
+yo @adenin/cloud-function
 ```
 
-Which again would add `another.js` and `_service.another.yaml`.
+...and then following the on screen prompts as before.
 
 The generator will automatically run `npm install` upon completion.
 
